@@ -51,7 +51,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="text-center">
+        <div className="text-center bg-slate-300">
           <h1 className="text-3xl font-bold p-2">
             Generate images created by AI
           </h1>
