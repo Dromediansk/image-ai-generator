@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import Content from "../components/Content";
+import Images from "../components/Images";
 import { emptyFormState, Form } from "../components/Form";
 import Spinner from "../components/Spinner";
 
@@ -9,6 +9,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   const [images, setImages] = useState([]);
+  const [error, setError] = useState(null);
 
   const handleFormStateChange = (event) => {
     setFormState({ query: event.target.value });
@@ -16,6 +17,8 @@ export default function Home() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setImages([]);
+    setError(null);
 
     try {
       setLoading(true);
@@ -24,13 +27,16 @@ export default function Home() {
         method: "POST",
         body: formState.query,
       });
-      const data = await response.json();
+      const { data } = await response.json();
 
-      if (!data.error) {
-        setImages(data.data);
+      if (data.error) {
+        throw new Error(data.error);
       }
+
+      setImages(data);
     } catch (error) {
       console.log(error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -63,7 +69,13 @@ export default function Home() {
 
         {loading && <Spinner />}
 
-        {!loading && images.length > 0 && <Content images={images} />}
+        {error && (
+          <div className="text-center">
+            <p className="text-lg">{error}</p>
+          </div>
+        )}
+
+        {images.length > 0 && <Images images={images} />}
       </main>
     </>
   );
