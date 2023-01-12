@@ -1,8 +1,12 @@
 import Head from "next/head";
 import { useState } from "react";
 import Images from "../components/Images";
-import { emptyFormState, Form } from "../components/Form";
-import Spinner from "../components/Spinner";
+import { SearchInput } from "../components/SearchInput";
+import Spinner from "../lib/Spinner";
+import Filter from "../components/Filter";
+import { IMAGE_SIZES } from "../utils/constants";
+
+const emptyFormState = { query: "", size: IMAGE_SIZES.SMALL };
 
 export default function Home() {
   const [formState, setFormState] = useState(emptyFormState);
@@ -12,7 +16,12 @@ export default function Home() {
   const [error, setError] = useState(null);
 
   const handleFormStateChange = (event) => {
-    setFormState({ query: event.target.value });
+    const value = event.target.value;
+
+    setFormState({
+      ...formState,
+      [event.target.name]: value,
+    });
   };
 
   const handleSubmit = async (event) => {
@@ -25,7 +34,7 @@ export default function Home() {
 
       const response = await fetch("/api/generateImages", {
         method: "POST",
-        body: formState.query,
+        body: JSON.stringify(formState),
       });
       const { data } = await response.json();
 
@@ -51,7 +60,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="text-center bg-slate-300">
+        <div className="text-center">
           <h1 className="text-3xl font-bold p-2">
             Generate images created by AI
           </h1>
@@ -60,12 +69,13 @@ export default function Home() {
           </h2>
         </div>
 
-        <Form
+        <SearchInput
           formState={formState}
           onChange={handleFormStateChange}
           onSubmit={handleSubmit}
           loading={!formState.query || loading}
         />
+        <Filter formState={formState} onChange={handleFormStateChange} />
 
         {loading && <Spinner />}
 
@@ -75,7 +85,9 @@ export default function Home() {
           </div>
         )}
 
-        {images.length > 0 && <Images images={images} />}
+        {images.length > 0 && (
+          <Images images={images} imageSize={formState.size} />
+        )}
       </main>
     </>
   );
