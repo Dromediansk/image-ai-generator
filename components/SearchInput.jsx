@@ -1,13 +1,13 @@
 export const SearchInput = ({ formState, onChange, onSubmit, loading }) => {
   return (
-    <div className="grid lg:grid-cols-3 grid-cols-none">
+    <div className="grid lg:grid-cols-3 grid-cols-none bg-slate-300">
       <div />
       <form>
         <div className="flex">
           <input
             className="flex-1 shadow appearance-none border rounded py-3 px-3 text-gray-700 leading-tight focus:outline-slate-400"
             type="text"
-            placeholder="Generate image"
+            placeholder="What's on your mind?"
             onChange={onChange}
             value={formState.query}
             name="query"

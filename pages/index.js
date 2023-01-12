@@ -5,6 +5,7 @@ import { SearchInput } from "../components/SearchInput";
 import Spinner from "../lib/Spinner";
 import Filter from "../components/Filter";
 import { IMAGE_SIZES } from "../utils/constants";
+import Header from "../components/Header";
 
 const emptyFormState = { query: "", size: IMAGE_SIZES.SMALL };
 const emptyFetchedData = { size: "", images: [] };
@@ -61,14 +62,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="text-center">
-          <h1 className="text-3xl font-bold p-2">
-            Generate images created by AI
-          </h1>
-          <h2 className="text-2xl font-bold p-2">
-            Search for any image. Be creative.
-          </h2>
-        </div>
+        <Header />
 
         <SearchInput
           formState={formState}
