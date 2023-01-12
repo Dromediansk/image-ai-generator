@@ -14,14 +14,14 @@ const convertSize = (size) => {
   }
 };
 
-const Images = ({ images, size }) => {
-  const sizeToShow = convertSize(size);
+const Images = ({ data }) => {
+  const sizeToShow = convertSize(data.size);
 
   return (
     <div className="m-2 p-2">
-      <ul className="flex justify-center">
-        {images.map(({ url }) => (
-          <li key={url} className="p-2">
+      <ul className="flex justify-center flex-wrap">
+        {data.images.map(({ url }) => (
+          <li key={url} className="p-1 m-2 border shadow">
             <Image src={url} alt={url} width={sizeToShow} height={sizeToShow} />
           </li>
         ))}

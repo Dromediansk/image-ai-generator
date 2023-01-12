@@ -7,12 +7,13 @@ import Filter from "../components/Filter";
 import { IMAGE_SIZES } from "../utils/constants";
 
 const emptyFormState = { query: "", size: IMAGE_SIZES.SMALL };
+const emptyFetchedData = { size: "", images: [] };
 
 export default function Home() {
   const [formState, setFormState] = useState(emptyFormState);
   const [loading, setLoading] = useState(false);
 
-  const [images, setImages] = useState([]);
+  const [fetchedData, setFetchedData] = useState(emptyFetchedData);
   const [error, setError] = useState(null);
 
   const handleFormStateChange = (event) => {
@@ -26,7 +27,7 @@ export default function Home() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setImages([]);
+    setFetchedData(emptyFetchedData);
     setError(null);
 
     try {
@@ -42,7 +43,7 @@ export default function Home() {
         throw new Error(data.error);
       }
 
-      setImages(data);
+      setFetchedData({ size: formState.size, images: data });
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -85,9 +86,7 @@ export default function Home() {
           </div>
         )}
 
-        {images.length > 0 && (
-          <Images images={images} imageSize={formState.size} />
-        )}
+        {fetchedData.images.length > 0 && <Images data={fetchedData} />}
       </main>
     </>
   );
