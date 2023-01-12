@@ -20,8 +20,8 @@ const Filter = ({ formState, onChange }) => {
             title="Count"
             value={formState.count}
             onChange={onChange}
-            min={1}
-            max={10}
+            min="1"
+            max="10"
           />
         </div>
       </div>
