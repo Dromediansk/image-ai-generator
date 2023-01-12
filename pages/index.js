@@ -4,10 +4,10 @@ import Images from "../components/Images";
 import { SearchInput } from "../components/SearchInput";
 import Spinner from "../lib/Spinner";
 import Filter from "../components/Filter";
-import { IMAGE_SIZES } from "../utils/constants";
 import Header from "../components/Header";
+import { IMAGE_SIZES } from "../utils/constants";
 
-const emptyFormState = { query: "", size: IMAGE_SIZES.SMALL };
+const emptyFormState = { query: "", size: IMAGE_SIZES.SMALL, count: "1" };
 const emptyFetchedData = { size: "", images: [] };
 
 export default function Home() {

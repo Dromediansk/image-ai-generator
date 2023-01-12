@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
     const response = await openai.createImage({
       prompt: body.query,
-      n: 2,
+      n: parseInt(body.count), // max limit is 10
       size: body.size,
     });
     res.status(200).json({ data: response.data.data });

@@ -1,5 +1,6 @@
 import Dropdown from "../lib/Dropdown";
 import { IMAGE_SIZES } from "../utils/constants";
+import NumberInput from "../lib/NumberInput";
 
 const Filter = ({ formState, onChange }) => {
   return (
@@ -13,6 +14,14 @@ const Filter = ({ formState, onChange }) => {
             title="Size"
             options={Object.values(IMAGE_SIZES)}
             onChange={onChange}
+          />
+          <NumberInput
+            name="count"
+            title="Count"
+            value={formState.count}
+            onChange={onChange}
+            min={1}
+            max={10}
           />
         </div>
       </div>
