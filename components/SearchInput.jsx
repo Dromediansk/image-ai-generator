@@ -10,7 +10,7 @@ export const SearchInput = ({ formState, onChange, onSubmit, loading }) => {
           <input
             className="flex-1 shadow appearance-none border rounded py-3 px-3 text-gray-700 leading-tight focus:outline-slate-400"
             type="text"
-            placeholder="What's on your mind?"
+            placeholder="What's on your mind? Be creative."
             onChange={onChange}
             value={formState.query}
             name="query"

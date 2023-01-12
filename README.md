@@ -1,6 +1,7 @@
 ## Image AI Generator
 
-with the usage of OpenAI, generating images based on creative input.
+Image generator with the help of OpenAI API and DALL·E 2 model.
+Possible to configure options.
 
 ### Tech stack
 
